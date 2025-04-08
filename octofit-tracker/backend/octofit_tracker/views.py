@@ -1,6 +1,19 @@
 from rest_framework import viewsets
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, LeaderboardSerializer, WorkoutSerializer
 from .models import User, Team, Activity, Leaderboard, Workout
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    base_url = 'https://[REPLACE-THIS-WITH-YOUR-CODESPACE-NAME]-8000.app.github.dev/'
+    return JsonResponse({
+        'users': base_url + 'api/users/',
+        'teams': base_url + 'api/teams/',
+        'activities': base_url + 'api/activities/',
+        'leaderboard': base_url + 'api/leaderboard/',
+        'workouts': base_url + 'api/workouts/'
+    })
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

@@ -24,6 +24,9 @@ class Command(BaseCommand):
         ]
         User.objects.bulk_create(users)
 
+        # Debug: Log created users
+        self.stdout.write(self.style.SUCCESS(f'Users: {User.objects.all()}'))
+
         # Create teams
         team1 = Team(_id=ObjectId(), name='Blue Team')
         team2 = Team(_id=ObjectId(), name='Gold Team')
@@ -31,6 +34,9 @@ class Command(BaseCommand):
         team2.save()
         team1.members.add(users[0], users[1])
         team2.members.add(users[2], users[3], users[4])
+
+        # Debug: Log created teams
+        self.stdout.write(self.style.SUCCESS(f'Teams: {Team.objects.all()}'))
 
         # Create activities
         activities = [
@@ -42,6 +48,9 @@ class Command(BaseCommand):
         ]
         Activity.objects.bulk_create(activities)
 
+        # Debug: Log created activities
+        self.stdout.write(self.style.SUCCESS(f'Activities: {Activity.objects.all()}'))
+
         # Create leaderboard entries
         leaderboard_entries = [
             Leaderboard(_id=ObjectId(), user=users[0], score=100),
@@ -52,6 +61,9 @@ class Command(BaseCommand):
         ]
         Leaderboard.objects.bulk_create(leaderboard_entries)
 
+        # Debug: Log created leaderboard entries
+        self.stdout.write(self.style.SUCCESS(f'Leaderboard: {Leaderboard.objects.all()}'))
+
         # Create workouts
         workouts = [
             Workout(_id=ObjectId(), name='Cycling Training', description='Training for a road cycling event'),
@@ -61,5 +73,8 @@ class Command(BaseCommand):
             Workout(_id=ObjectId(), name='Swimming Training', description='Training for a swimming competition'),
         ]
         Workout.objects.bulk_create(workouts)
+
+        # Debug: Log created workouts
+        self.stdout.write(self.style.SUCCESS(f'Workouts: {Workout.objects.all()}'))
 
         self.stdout.write(self.style.SUCCESS('Successfully populated the database with test data.'))

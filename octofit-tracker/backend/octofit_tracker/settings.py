@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "octofit_tracker",
+    "djongo",
 ]
 
 MIDDLEWARE = [
@@ -78,8 +79,6 @@ DATABASES = {
     "default": {
         "ENGINE": "djongo",
         "NAME": "octofit_db",
-        "HOST": "localhost",
-        "PORT": 27017,
     }
 }
 
